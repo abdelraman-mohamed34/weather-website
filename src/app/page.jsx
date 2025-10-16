@@ -1,6 +1,4 @@
 "use client";
-
-import Card from "./components/mainFolder/Card";
 import SideBar from "./components/SideBar";
 import RightBar from "./components/RightBar";
 import Header from "./Header/page";

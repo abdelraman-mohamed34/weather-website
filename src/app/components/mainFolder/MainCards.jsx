@@ -1,3 +1,4 @@
+'use client'
 import React, { use } from 'react'
 import Card from './Card.jsx'
 import Forecast from './Forecast.jsx'
