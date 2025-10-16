@@ -1,0 +1,35 @@
+@import "tailwindcss";
+@import 'leaflet/dist/leaflet.css';
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --padding-bottom: 5rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* back ground */
+    --background: oklch(16.362% 0.03518 235.945);
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@media(max-width: 640px) {
+  body {
+    padding-bottom: var(--padding-bottom);
+  }
+}
