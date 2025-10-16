@@ -3,10 +3,11 @@ import { useEffect, useState, useRef } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import { useSelector } from "react-redux";
-import SideBar from "../components/SideBar";
 import { motion } from 'framer-motion';
-import Header from "../Header/page";
 import { useMediaQuery } from "@mui/material";
+
+import SideBar from "../components/SideBar";
+import Header from "../Header/page";
 
 const userIcon = new L.Icon({
     iconUrl: "https://cdn-icons-png.flaticon.com/512/64/64113.png",
