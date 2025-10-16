@@ -1,5 +1,5 @@
+'use client'
 import React, { useEffect, useState } from 'react'
-
 import { CiTempHigh } from "react-icons/ci";
 import { FaWind } from "react-icons/fa";
 import { WiSunrise, WiSunset, WiNightAltRainMix, WiHumidity } from "react-icons/wi";

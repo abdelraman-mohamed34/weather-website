@@ -1,8 +1,7 @@
-import { addCountry } from '@/app/features/country/saveCountrySlice'
-import Link from 'next/link'
+'use client'
+
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { motion } from 'framer-motion'
 import LocationBtn from './LocationBtn'
 
 function Card(props) {

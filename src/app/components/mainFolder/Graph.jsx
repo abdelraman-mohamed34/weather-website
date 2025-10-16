@@ -1,3 +1,5 @@
+'use client'
+
 import { Suspense, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";

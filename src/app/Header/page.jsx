@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState } from 'react'
 import { fetchApiCountries } from '../features/country/fetchCountrySlice'
 import { useDispatch } from 'react-redux'
