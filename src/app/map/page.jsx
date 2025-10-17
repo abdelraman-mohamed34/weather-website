@@ -26,7 +26,7 @@ const Popup = dynamic(
     { ssr: false }
 );
 
-const FlyToLocation = dynamic(() => import('../components/FlyToLocation'), { ssr: false });
+const FlyToLocation = dynamic(() => import('./Fly.jsx'), { ssr: false });
 
 const userIcon = new L.Icon({
     iconUrl: "https://cdn-icons-png.flaticon.com/512/64/64113.png",
