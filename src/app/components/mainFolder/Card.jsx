@@ -58,7 +58,7 @@ function Card(props) {
         <>
             <div className={`md:rounded-4xl rounded-2xl h-full xl:mt-3 sm:p-10 p-10 py-15 text-white ${bg} relative`}>
                 <LocationBtn city={city} />
-                <div className='flex justify-between items-center'>
+                <div className={`flex justify-between items-center ${!city ? "h-[100px]" : null}`}>
                     <h1 className='md:text-4xl text-2xl'>{city?.city?.name || "No city found"}</h1>
                     <span className='flex justify-between items-end p-5 px-7 absolute w-full bottom-0 left-0'>
                         <h1 className='lg:text-9xl md:text-6xl sm:text-5xl text-6xl font-bold'>

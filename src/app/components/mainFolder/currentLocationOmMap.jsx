@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
-// مكونات Leaflet تُحمّل ديناميكياً بدون SSR
 const MapContainer = dynamic(
     () => import("react-leaflet").then((m) => m.MapContainer),
     { ssr: false }
@@ -26,7 +25,6 @@ export default function UserLocationMap({ city }) {
     const [position, setPosition] = useState([0, 0]);
     const [loaded, setLoaded] = useState(false);
 
-    // تحميل Leaflet فقط في العميل
     useEffect(() => {
         import("leaflet").then((leaflet) => {
             const icon = new leaflet.Icon({
@@ -44,18 +42,14 @@ export default function UserLocationMap({ city }) {
         setLoaded(true);
     }, [city]);
 
-    if (!loaded || !L || !userIcon)
-        return (
-            <div className="w-full h-[70vh] flex items-center justify-center text-white">
-                Loading map...
-            </div>
-        );
+    if (!loaded || !L || !userIcon) return
 
     return (
         <MapContainer
             center={position}
             zoom={3}
-            className="w-full h-[70vh] md:rounded-4xl rounded-2xl shadow-lg xl:mt-3"
+
+            className="md:rounded-4xl rounded-2xl h-full xl:mt-3 sm:p-10 p-10 py-15 text-white"
             zoomControl={false}
             scrollWheelZoom={false}
             doubleClickZoom={false}

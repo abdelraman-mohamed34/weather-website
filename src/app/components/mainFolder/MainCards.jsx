@@ -14,20 +14,26 @@ function MainCards(props) {
 
     return (
         <div>
-            <span className='grid md:grid-cols-2 grid-rows-2 md:grid-rows-1 gap-3 xl:pb-3 xl:mt-0 mt-3 lg:h-90 md:h-70'>
+            <div className='grid md:grid-cols-2 grid-rows-2 md:grid-rows-1 gap-3 xl:pb-3 xl:mt-0 mt-3 lg:h-90 md:h-70'>
                 <Card city={props.city} />
                 <UserLocationMap city={props.city} />
-            </span>
-            <button
-                onClick={() => dispatch(addCountry(props.city))}
-                className='mt-2 bg-indigo-500 text-white px-6 py-2 rounded-lg hover:bg-sky-700 active:scale-95 transition w-full'
-            >
-                Save
-            </button>
+            </div>
+            {props.city &&
+                (
+                    <div div className='w-full flex justify-end'>
+                        <button
+                            onClick={() => dispatch(addCountry(props.city))}
+                            className='mt-2 bg-indigo-500 text-white px-6 py-2 rounded-lg hover:bg-indigo-600 active:scale-99 transition w-20'
+                        >
+                            Save
+                        </button>
+                    </div>
+                )
+            }
             <Forecast city={props.city} />
             <AirCond city={props.city} />
             <WeatherChart city={props.city} />
-        </div>
+        </div >
     )
 }
 

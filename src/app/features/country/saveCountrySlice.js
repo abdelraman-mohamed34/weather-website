@@ -21,7 +21,7 @@ export const fetchCountryByName = createAsyncThunk(
 )
 
 const initialState = {
-    countries: savedFromLocalStorage, // تحميل الدول المحفوظة مسبقاً
+    countries: savedFromLocalStorage,
     status: 'idle',
     error: null,
 }
