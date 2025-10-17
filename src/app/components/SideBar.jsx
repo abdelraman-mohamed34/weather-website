@@ -3,6 +3,7 @@
 import React from 'react'
 import { FaWind } from "react-icons/fa";
 import { CiBookmark, CiMap, CiSettings } from "react-icons/ci";
+import { FiHome } from "react-icons/fi";
 import Link from 'next/link';
 
 function SideBar(props) {
@@ -11,7 +12,7 @@ function SideBar(props) {
     const nav = [
         { id: 1, name: 'map', icon: <CiMap size={iconSize} />, function: '/map' },
         { id: 2, name: 'saved', icon: <CiBookmark size={iconSize} />, function: '/saved' },
-        { id: 3, name: 'settings', icon: <CiSettings size={iconSize} />, function: '#' },
+        { id: 3, name: 'Home', icon: <FiHome size={iconSize} />, function: '/' },
     ]
 
     const defaultStyles = 'sm:bg-gray-800 bg-gray-900 sm:rounded-2xl sm:p-5 p-4 px-7 flex items-center sm:flex-col sm:sticky sm:top-1 fixed z-[2000] bottom-0 w-full sm:h-screen transition-all duration-300'
