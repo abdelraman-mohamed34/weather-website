@@ -1,4 +1,5 @@
 'use client'
+
 import React, { useState, useEffect } from 'react'
 import { fetchApiCountries } from '../features/country/fetchCountrySlice'
 import { useDispatch } from 'react-redux'
@@ -12,34 +13,33 @@ function Header() {
         dispatch(fetchApiCountries({ name: loadingSearched.trim() }))
     }
 
-    useEffect(() => {
-        // الحصول على الموقع الحالي
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                async (position) => {
-                    const { latitude, longitude } = position.coords
-                    console.log("Latitude:", latitude)
-                    console.log("Longitude:", longitude)
+    // useEffect(() => {
+    //     if (navigator.geolocation) {
+    //         navigator.geolocation.getCurrentPosition(
+    //             async (position) => {
+    //                 const { latitude, longitude } = position.coords
+    //                 console.log("Latitude:", latitude)
+    //                 console.log("Longitude:", longitude)
 
-                    const response = await fetch(
-                        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
-                    )
-                    const data = await response.json()
+    //                 const response = await fetch(
+    //                     `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+    //                 )
+    //                 const data = await response.json()
 
-                    const country = data.address.country
-                    const city = data.address.city || data.address.town || data.address.village
+    //                 const country = data.address.country
+    //                 const city = data.address.city || data.address.town || data.address.village
 
-                    console.log("🌍 الدولة:", country)
-                    console.log("🏙️ المدينة:", city)
-                },
-                (error) => {
-                    console.error("Error:", error.message)
-                }
-            )
-        } else {
-            console.log("Geolocation is not supported by this browser.")
-        }
-    }, [])  // empty dependency → run once on client
+    //                 console.log("🌍 الدولة:", country)
+    //                 console.log("🏙️ المدينة:", city)
+    //             },
+    //             (error) => {
+    //                 console.error("Error:", error.message)
+    //             }
+    //         )
+    //     } else {
+    //         console.log("Geolocation is not supported by this browser.")
+    //     }
+    // }, [])
 
     return (
         <div className='w-full lg:min-w-150'>

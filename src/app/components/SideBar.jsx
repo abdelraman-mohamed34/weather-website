@@ -1,4 +1,5 @@
 'use client'
+
 import React from 'react'
 import { FaWind } from "react-icons/fa";
 import { CiBookmark, CiMap, CiSettings } from "react-icons/ci";

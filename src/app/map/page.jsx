@@ -1,13 +1,34 @@
 'use client';
-import { useEffect, useState, useRef } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+
+import dynamic from 'next/dynamic';
+import { useEffect, useState } from "react";
 import L from "leaflet";
-import { useSelector } from "react-redux";
 import { motion } from 'framer-motion';
 import { useMediaQuery } from "@mui/material";
-
 import SideBar from "../components/SideBar";
 import Header from "../Header/page";
+import { useSelector } from "react-redux";
+
+const MapContainer = dynamic(
+    () => import('react-leaflet').then(mod => mod.MapContainer),
+    { ssr: false }
+);
+const TileLayer = dynamic(
+    () => import('react-leaflet').then(mod => mod.TileLayer),
+    { ssr: false }
+);
+const Marker = dynamic(
+    () => import('react-leaflet').then(mod => mod.Marker),
+    { ssr: false }
+);
+const Popup = dynamic(
+    () => import('react-leaflet').then(mod => mod.Popup),
+    { ssr: false }
+);
+const useMap = dynamic(
+    () => import('react-leaflet').then(mod => mod.useMap),
+    { ssr: false }
+);
 
 const userIcon = new L.Icon({
     iconUrl: "https://cdn-icons-png.flaticon.com/512/64/64113.png",
@@ -25,51 +46,31 @@ function FlyToLocation({ position }) {
 export default function Page() {
     const [position, setPosition] = useState([0, 0]);
     const [loaded, setLoaded] = useState(false);
-
     const country = useSelector((state) => state.country);
     const [city, setCity] = useState(null);
-
     const [searchResult, setSearchResult] = useState(null);
-    const smallWindow = useMediaQuery('(max-width:640px)')
-
+    const smallWindow = useMediaQuery('(max-width:640px)');
 
     useEffect(() => {
         if (country && country.city) {
-            setCity(country)
+            setCity(country);
         } else {
-            const saved = localStorage.getItem('currentCountry')
+            const saved = localStorage.getItem('currentCountry');
             if (saved) {
                 try {
-                    setCity(JSON.parse(saved))
+                    setCity(JSON.parse(saved));
                 } catch (err) {
-                    console.error('Error parsing localStorage data', err)
+                    console.error('Error parsing localStorage data', err);
                 }
             }
         }
-    }, [country])
+    }, [country]);
 
     useEffect(() => {
         if (!city?.city?.coord) return;
         setPosition([city.city.coord.lat, city.city.coord.lon]);
         setLoaded(true);
     }, [city]);
-
-    const handleSearch = async (e) => {
-        e.preventDefault();
-        const res = await fetch(
-            `https://nominatim.openstreetmap.org/search?format=json&q=${searchTerm}`
-        );
-        const data = await res.json();
-
-        if (data && data.length > 0) {
-            const { lat, lon, display_name } = data[0];
-            const newPos = [parseFloat(lat), parseFloat(lon)];
-            setSearchResult({ name: display_name, position: newPos });
-            setPosition(newPos);
-        } else {
-            alert("cant search about this area");
-        }
-    };
 
     if (!loaded)
         return (
@@ -78,10 +79,8 @@ export default function Page() {
             </div>
         );
 
-    const bounds = L.latLngBounds(
-        L.latLng(-90, -180),
-        L.latLng(90, 180)
-    );
+    const bounds = L.latLngBounds(L.latLng(-90, -180), L.latLng(90, 180));
+
     return (
         <div className="w-full h-screen relative">
             <MapContainer
@@ -89,10 +88,10 @@ export default function Page() {
                 zoom={8}
                 className="w-full h-full shadow-lg"
                 zoomControl={false}
-                scrollWheelZoom={true}
-                doubleClickZoom={true}
-                dragging={true}
-                touchZoom={true}
+                scrollWheelZoom
+                doubleClickZoom
+                dragging
+                touchZoom
                 maxZoom={13}
                 minZoom={2}
                 maxBounds={bounds}
@@ -107,26 +106,15 @@ export default function Page() {
                         You are in {city?.city?.name}, {city?.city?.country}
                     </Popup>
                 </Marker>
-
                 {searchResult && (
                     <Marker position={searchResult.position}>
                         <Popup>{searchResult.name}</Popup>
                     </Marker>
                 )}
-
                 <FlyToLocation position={position} />
             </MapContainer>
 
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <motion.form
-                    onSubmit={handleSearch}
-                    initial={{ y: -50, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 0.6 }}
-                    className="hidden absolute top-5 left-1/2 -translate-x-1/2 z-[1001] pointer-events-auto bg-gray-800/70 backdrop-blur-md p-3 rounded-full gap-2 shadow-lg"
-                >
-                </motion.form>
-
                 <motion.div
                     initial={{ y: -100 }}
                     animate={{ y: 0 }}
@@ -157,5 +145,3 @@ export default function Page() {
         </div>
     );
 }
-
-
