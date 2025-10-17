@@ -25,23 +25,14 @@ const Popup = dynamic(
     () => import('react-leaflet').then(mod => mod.Popup),
     { ssr: false }
 );
-const useMap = dynamic(
-    () => import('react-leaflet').then(mod => mod.useMap),
-    { ssr: false }
-);
+
+const FlyToLocation = dynamic(() => import('../components/FlyToLocation'), { ssr: false });
 
 const userIcon = new L.Icon({
     iconUrl: "https://cdn-icons-png.flaticon.com/512/64/64113.png",
     iconSize: [35, 35],
 });
 
-function FlyToLocation({ position }) {
-    const map = useMap();
-    useEffect(() => {
-        if (position) map.flyTo(position, 7, { duration: 1.5 });
-    }, [position]);
-    return null;
-}
 
 export default function Page() {
     const [position, setPosition] = useState([0, 0]);
