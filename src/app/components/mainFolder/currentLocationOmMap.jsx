@@ -1,32 +1,61 @@
-'use client'
-
+'use client';
 import { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import L from "leaflet";
+import dynamic from "next/dynamic";
 
-const userIcon = new L.Icon({
-    iconUrl: "https://cdn-icons-png.flaticon.com/512/64/64113.png",
-    iconSize: [35, 35],
-});
+// مكونات Leaflet تُحمّل ديناميكياً بدون SSR
+const MapContainer = dynamic(
+    () => import("react-leaflet").then((m) => m.MapContainer),
+    { ssr: false }
+);
+const TileLayer = dynamic(
+    () => import("react-leaflet").then((m) => m.TileLayer),
+    { ssr: false }
+);
+const Marker = dynamic(
+    () => import("react-leaflet").then((m) => m.Marker),
+    { ssr: false }
+);
+const Popup = dynamic(
+    () => import("react-leaflet").then((m) => m.Popup),
+    { ssr: false }
+);
 
-export default function UserLocationMap(props) {
+export default function UserLocationMap({ city }) {
+    const [L, setL] = useState(null);
+    const [userIcon, setUserIcon] = useState(null);
     const [position, setPosition] = useState([0, 0]);
     const [loaded, setLoaded] = useState(false);
-    const city = props.city
+
+    // تحميل Leaflet فقط في العميل
+    useEffect(() => {
+        import("leaflet").then((leaflet) => {
+            const icon = new leaflet.Icon({
+                iconUrl: "https://cdn-icons-png.flaticon.com/512/64/64113.png",
+                iconSize: [35, 35],
+            });
+            setL(leaflet);
+            setUserIcon(icon);
+        });
+    }, []);
 
     useEffect(() => {
-        if (!city) return;
-        if (!city.city || !city.city.coord) return;
+        if (!city?.city?.coord) return;
         setPosition([city.city.coord.lat, city.city.coord.lon]);
         setLoaded(true);
     }, [city]);
 
-    if (!loaded) return <div className="w-full md:h-100 sm:h-85 h-70 flex items-center justify-center text-white">Loading map...</div>;
+    if (!loaded || !L || !userIcon)
+        return (
+            <div className="w-full h-[70vh] flex items-center justify-center text-white">
+                Loading map...
+            </div>
+        );
+
     return (
         <MapContainer
             center={position}
             zoom={3}
-            className="w-full h-full md:rounded-4xl rounded-2xl shadow-lg xl:mt-3"
+            className="w-full h-[70vh] md:rounded-4xl rounded-2xl shadow-lg xl:mt-3"
             zoomControl={false}
             scrollWheelZoom={false}
             doubleClickZoom={false}
@@ -38,7 +67,9 @@ export default function UserLocationMap(props) {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             />
             <Marker position={position} icon={userIcon}>
-                <Popup>You are in {city?.city?.name + ',' + city?.city?.country}</Popup>
+                <Popup>
+                    You are in {city?.city?.name}, {city?.city?.country}
+                </Popup>
             </Marker>
         </MapContainer>
     );
