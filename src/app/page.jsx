@@ -5,7 +5,7 @@ import Header from "./Header/page";
 import MainCards from "./components/mainFolder/MainCards";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { fetchApiCountries } from "./features/country/fetchCountrySlice"; // ✅ تأكد من المسار
+import { fetchApiCountries } from "./features/country/fetchCountrySlice";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -14,11 +14,9 @@ export default function Home() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // ✅ لو الدولة موجودة في الـ Redux
       if (country && country.city) {
         setCity(country);
       } else {
-        // ✅ لو فيه بيانات محفوظة في localStorage
         const saved = localStorage.getItem("currentCountry");
         if (saved) {
           try {
@@ -27,7 +25,6 @@ export default function Home() {
             console.error("Error parsing localStorage data", err);
           }
         } else {
-          // ✅ أول مرة تفتح الصفحة — جيب بيانات مصر
           dispatch(fetchApiCountries({ name: "Egypt" }));
         }
       }

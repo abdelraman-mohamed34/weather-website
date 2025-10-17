@@ -29,7 +29,7 @@ export default function SavedPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-b text-gray-200 grid sm:grid-cols-[7rem_1fr]">
+        <div className="bg-gradient-to-b text-gray-200 grid sm:grid-cols-[7rem_1fr]">
             {/* side bar */}
             <motion.div
                 initial={!smallWindow ? { y: 12, x: 12 } : { y: 0, x: 0 }}

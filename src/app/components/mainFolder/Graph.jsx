@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
+import { motion, useInView } from "framer-motion";
 
 export default function WeatherChart(props) {
     const [forecast, setForecast] = useState([]);
@@ -41,6 +42,7 @@ export default function WeatherChart(props) {
                             stroke="oklch(58.5% 0.233 277.117)"
                             strokeWidth={3}
                             dot={{ r: 3 }}
+                            inView="true"
                             animationDuration={1000}
                         />
                     </LineChart>
