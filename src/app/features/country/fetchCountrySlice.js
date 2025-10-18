@@ -28,6 +28,7 @@ export const countrySlice = createSlice({
             }).addCase(fetchApiCountries.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.country = action.payload;
+                window.location.href = "/";
             })
             .addCase(fetchApiCountries.rejected, (state, action) => {
                 state.status = "failed";

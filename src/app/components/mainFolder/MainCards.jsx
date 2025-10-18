@@ -1,39 +1,49 @@
 'use client'
-import React, { use } from 'react'
+
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { addCountry } from '@/app/features/country/saveCountrySlice.js'
+
+import { useMediaQuery } from '@mui/material'
+
 import Card from './Card.jsx'
 import Forecast from './Forecast.jsx'
 import AirCond from './AirCond.jsx'
 import WeatherChart from './Graph.jsx'
 import UserLocationMap from './currentLocationOmMap.jsx'
-import { addCountry } from '@/app/features/country/saveCountrySlice.js'
-import { useDispatch } from 'react-redux'
+import RightBar from '../RightBar.jsx'
 
-function MainCards(props) {
-
+function MainCards({ city }) {
     const dispatch = useDispatch()
+    const mediumWindow = useMediaQuery('(max-width:768px)');
 
     return (
-        <div>
-            <div className='grid md:grid-cols-2 grid-rows-2 md:grid-rows-1 gap-3 xl:pb-3 xl:mt-0 mt-3 lg:h-90 md:h-70'>
-                <Card city={props.city} />
-                <UserLocationMap city={props.city} />
+        <div className="relative space-y-4 xl:space-y-6">
+            {/* ===== Top Section (Main Weather + Map) ===== */}
+            <div className="grid md:grid-cols-[1fr_20rem] gap-3 xl:pb-3 xl:mt-0 md:mt-3 lg:h-90 md:h-70 h-120 relative z-20">
+                <Card city={city} />
+                <UserLocationMap city={city} />
             </div>
-            {props.city &&
-                (
-                    <div div className='w-full flex justify-end'>
-                        <button
-                            onClick={() => dispatch(addCountry(props.city))}
-                            className='mt-2 bg-indigo-500 text-white px-6 py-2 rounded-lg hover:bg-indigo-600 active:scale-99 transition w-20'
-                        >
-                            Save
-                        </button>
-                    </div>
-                )
-            }
-            <Forecast city={props.city} />
-            <AirCond city={props.city} />
-            <WeatherChart city={props.city} />
-        </div >
+
+            {/* ===== Save Button ===== */}
+            {city && (
+                <div className="w-full justify-center md:justify-end hidden relative z-30">
+                    <button
+                        onClick={() => dispatch(addCountry(city))}
+                        className="bg-indigo-500 text-white px-6 py-2 rounded-lg hover:bg-indigo-600 active:scale-95 transition-all shadow-md"
+                    >
+                        Save
+                    </button>
+                </div>
+            )}
+
+            <div className="bg-gray-900 text-white md:rounded-[25px] rounded-t-[25px] shadow-xl p-4 md:p-6 space-y-6 relative -mt-10 md:-mt-0 z-40">
+                <Forecast city={city} />
+                {mediumWindow && <RightBar city={city} />}
+                <AirCond city={city} />
+                <WeatherChart city={city} />
+            </div>
+        </div>
     )
 }
 

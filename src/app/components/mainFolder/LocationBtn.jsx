@@ -16,7 +16,7 @@ function LocationBtn(props) {
                 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                className="absolute top-5 left-5 text-gray-600 rounded-2xl bg-white px-3 p-1 cursor-pointer flex items-center gap-1 shadow-md"
+                className="absolute md:top-5 left-5 text-gray-600 rounded-2xl bg-white px-3 p-1 cursor-pointer flex items-center gap-1 shadow-md z-20"
             >
                 <motion.svg
                     xmlns="http://www.w3.org/2000/svg"

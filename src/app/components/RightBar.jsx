@@ -42,17 +42,17 @@ function RightBar(props) {
 
     return (
         <motion.div
-            className="rounded-2xl bg-gray-800 sm:p-10 p-5 overflow-hidden sm:sticky sm:top-1 xl:h-screen"
+            className="rounded-2xl md:bg-gray-800 md:p-10 px-5 overflow-hidden sm:sticky sm:top-1 xl:h-screen"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
         >
-            <h1 className="text-gray-400 font-bold text-md sm:mb-5 mb-1">5-DAY FORECAST</h1>
-            <div className='px-5'>
+            <h1 className="text-gray-400 font-bold text-md sm:mb-5 mb-1">5-Day's Forecast</h1>
+            <div className='md:px-5'>
                 {dailyForecast.map((i, index) => (
                     <motion.span
                         key={i.date}
-                        className="justify-between grid grid-cols-3 p-5 xl:py-10 border-b border-gray-600 last:border-0
+                        className="justify-between grid grid-cols-2 md:p-5 xl:py-10 md:border-b border-gray-600 last:border-0
                      cursor-pointer hover:scale-105 transition-all bg-base-100"
                         initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -64,23 +64,25 @@ function RightBar(props) {
                     >
                         <h1 className="text-gray-400 items-center flex">{i.day}</h1>
 
-                        <span className="flex justify-center items-center sm:gap-2">
-                            <motion.img
-                                src={`https://openweathermap.org/img/wn/${i.icon}.png`}
-                                alt="weather icon"
-                                className="sm:w-15 w-12"
-                                whileHover={{ rotate: 10, scale: 1.2 }}
-                                transition={{ type: "spring", stiffness: 200 }}
-                            />
-                            <h1 className="text-white font-medium">{i.condition}</h1>
-                        </span>
-
-                        <h1 className="flex justify-center items-center text-white font-semibold">
-                            {Math.round(i.temp_max)}
-                            <span>
-                                <h1 className="text-gray-400">{'/' + Math.round(i.temp_min)}</h1>
+                        <div className='flex justify-end gap-3'>
+                            <span className="flex justify-center items-center">
+                                <motion.img
+                                    src={`https://openweathermap.org/img/wn/${i.icon}.png`}
+                                    alt="weather icon"
+                                    className="sm:w-15 w-12"
+                                    whileHover={{ rotate: 10, scale: 1.2 }}
+                                    transition={{ type: "spring", stiffness: 200 }}
+                                />
+                                <h1 className="text-white font-medium">{i.condition}</h1>
                             </span>
-                        </h1>
+
+                            <h1 className="flex justify-center items-center text-white font-semibold md:ml-2">
+                                {Math.round(i.temp_max)}
+                                <span>
+                                    <h1 className="text-gray-400">{'/' + Math.round(i.temp_min)}</h1>
+                                </span>
+                            </h1>
+                        </div>
                     </motion.span>
                 ))}
             </div>

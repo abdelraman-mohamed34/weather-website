@@ -48,8 +48,7 @@ export default function UserLocationMap({ city }) {
         <MapContainer
             center={position}
             zoom={3}
-
-            className="md:rounded-4xl rounded-2xl h-full xl:mt-3 sm:p-10 p-10 py-15 text-white"
+            className="md:rounded-4xl rounded-2xl h-full xl:mt-3 sm:p-10 p-10 py-15 text-white md:flex hidden"
             zoomControl={false}
             scrollWheelZoom={false}
             doubleClickZoom={false}

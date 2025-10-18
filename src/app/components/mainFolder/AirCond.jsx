@@ -74,7 +74,7 @@ function AirCond(props) {
                 transition={{ duration: 0.5 }}
                 className=' whitespace-nowrap md:p-5 mb-3'
             >
-                <span className='flex items-center gap-1 text-gray-400 font-bold md:text-xl md:mb-3 mb-1'>
+                <span className='flex items-center gap-1 text-gray-400 font-bold md:text-2xl text-sm md:mb-3 mb-1'>
                     {item.icon} {item.name}
                 </span>
                 <span className='flex justify-start pl-5'>
@@ -82,7 +82,7 @@ function AirCond(props) {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.8 }}
-                        className="md:text-3xl text-2xl font-bold text-gray-300"
+                        className="md:text-3xl text-lg font-bold text-gray-300"
                     >
                         {displayValue}<span>{item.unit}</span>
                     </motion.p>
@@ -92,7 +92,7 @@ function AirCond(props) {
     }
 
     return (
-        <div className='bg-gray-800 w-full sm:p-10 p-5 py-5 rounded-2xl my-3'>
+        <div className='bg-gray-800/50 w-full sm:p-10 p-5 py-5 rounded-2xl my-3'>
             {/* Header */}
             <div className='flex w-full justify-between items-center mb-3'>
                 <h1 className='font-bold text-gray-400 whitespace-nowrap'>Air Conditions</h1>
@@ -102,7 +102,7 @@ function AirCond(props) {
             </div>
 
             {/* Content Grid */}
-            <div className='grid grid-cols-2 gap-1 px-5'>
+            <div className='grid grid-cols-2 gap-1 md:px-5'>
                 {content.map(item => <AirItem key={item.id} item={item} />)}
                 <AnimatePresence>
                     {showMore && (

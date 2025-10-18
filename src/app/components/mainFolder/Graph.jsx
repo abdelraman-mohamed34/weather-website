@@ -23,7 +23,7 @@ export default function WeatherChart(props) {
     }, [city]);
 
     return (
-        <div className="w-full h-64 bg-gray-800 rounded-2xl text-white sm:p-10 py-5" tabIndex={-1} onMouseDown={(e) => e.preventDefault()}>
+        <div className="w-full h-64 bg-gray-800/50 rounded-2xl text-white sm:p-10 py-5" tabIndex={-1} onMouseDown={(e) => e.preventDefault()}>
             <h2 className="text-gray-400 text-lg font-semibold mb-3 sm:pl-0 pl-5">Temperature Graph (Next 24h)</h2>
             <Suspense fallback={<div>Loading chart...</div>}>
                 <ResponsiveContainer
