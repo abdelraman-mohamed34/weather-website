@@ -39,7 +39,7 @@ function MainCards({ city, primaryBg }) {
                 </div>
             )}
 
-            <div className={`${colors.background} text-white md:rounded-[25px] rounded-t-[25px] md:shadow-none shadow-lg p-4 md:p-6 space-y-6 relative -mt-10 md:-mt-0 z-40`}>
+            <div className={`${colors.background} text-white md:rounded-[25px] rounded-t-[25px] -mt-10 md:shadow-none shadow-lg p-4 md:p-6 space-y-6 relative md:-mt-0 z-40`}>
                 <Forecast city={city} />
                 {mediumWindow && <RightBar city={city} />}
                 <AirCond city={city} />

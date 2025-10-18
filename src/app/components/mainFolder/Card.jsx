@@ -9,13 +9,16 @@ import { useMediaQuery } from '@mui/system';
 function Card({ city }) {
     const dispatch = useDispatch()
     const [currentWeather, setCurrentWeather] = useState(null)
-    const [state, setState] = useState('sunny') // sunny | moon | rainy | stormy
+    const [state, setState] = useState('sunny') // sunny | moon | rainy | stormy | foggy | snowy
 
     // 🎨 Themes
     const sunnyClassName = 'bg-red-400'
     const moonClassName = 'bg-sky-700/90'
     const rainyClassName = 'bg-gradient-to-b from-sky-600 to-blue-900'
     const stormyClassName = 'bg-gradient-to-b from-gray-700 to-black'
+    const foggyClassName = 'bg-gray-400/70'
+    const snowyClassName = 'bg-white/20'
+
     // ☀️ Sunny
     const sunnyJSX = (
         <>
@@ -39,25 +42,25 @@ function Card({ city }) {
         </>
     )
 
-    // 🌙 Moon
+    // 🌙 Moon (Night)
     const moonJSX = (
         <>
             <motion.span
                 initial={{ y: -200, opacity: 0 }}
-                animate={{ y: 0, opacity: 0.4 }}
+                animate={{ y: 0, opacity: 0.3 }}
                 transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
                 className="rounded-full p-40 bg-sky-600 absolute -top-43 right-5 opacity-30 z-10"
             />
             <motion.span
                 initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 0.2, y: 0 }}
+                whileInView={{ opacity: 0.15, y: 0 }}
                 transition={{ duration: 0.8, ease: 'easeOut' }}
                 className="rounded-full p-35 bg-sky-200 absolute -top-38 right-10 opacity-10 z-10"
             />
             <motion.span
                 animate={{ scale: [1, 1.1, 1], rotate: [0, 5, 0] }}
                 transition={{ repeat: Infinity, duration: 9, ease: 'easeInOut' }}
-                className="rounded-full p-25 bg-yellow-100 absolute -top-30 right-20 opacity-100 z-10"
+                className="rounded-full p-25 bg-yellow-100 absolute -top-30 right-20 opacity-100 z-10 shadow-[0_0_15px_rgba(255,255,255,0.4)]"
             />
         </>
     )
@@ -105,6 +108,32 @@ function Card({ city }) {
         </>
     )
 
+    // 🌫️ Foggy
+    const foggyJSX = (
+        <>
+            <motion.div
+                animate={{ x: [0, 20, 0], opacity: [0.2, 0.5, 0.2] }}
+                transition={{ repeat: Infinity, duration: 5, ease: 'easeInOut' }}
+                className="absolute top-0 left-0 w-full h-full bg-white/10 z-10"
+            />
+        </>
+    )
+
+    // ❄️ Snowy
+    const snowyJSX = (
+        <>
+            {[...Array(6)].map((_, i) => (
+                <motion.span
+                    key={i}
+                    initial={{ y: -50, opacity: 0 }}
+                    animate={{ y: [0, 80, 0], opacity: [0, 0.7, 0] }}
+                    transition={{ repeat: Infinity, duration: 3 + i * 0.5, ease: 'easeInOut' }}
+                    className={`rounded-full p-5 bg-white absolute top-0 left-${i * 15} opacity-50 z-10`}
+                />
+            ))}
+        </>
+    )
+
     // 🧠 detect current weather
     useEffect(() => {
         if (!city?.list?.length) return
@@ -127,6 +156,8 @@ function Card({ city }) {
         moon: moonClassName,
         rainy: rainyClassName,
         stormy: stormyClassName,
+        foggy: foggyClassName,
+        snowy: snowyClassName,
     }
 
     // 🧩 Detect state from desc
@@ -134,6 +165,8 @@ function Card({ city }) {
         if (!desc) return
         if (desc.includes('thunder')) setState('stormy')
         else if (desc.includes('rain')) setState('rainy')
+        else if (desc.includes('snow')) setState('snowy')
+        else if (desc.includes('fog') || desc.includes('mist')) setState('foggy')
         else if (desc.includes('clear')) setState('sunny')
         else setState('moon')
     }, [desc])
@@ -145,14 +178,14 @@ function Card({ city }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className={`md:rounded-4xl h-full xl:mt-3 p-5 py-15 text-white md:relative fixed top-0 right-0 w-full overflow-hidden md:shadow-xl ${weatherBackgrounds[state]}`}
+            className={`md:rounded-4xl h-full xl:mt-3 p-5 py-15 text-white md:relative w-full fixed max-h-[480px] md:shadow-xl ${weatherBackgrounds[state]} overflow-hidden`}
         >
             <LocationBtn city={city} style={{ zIndex: 20 }} />
 
             <div className="flex justify-between items-center z-20 md:mt-0 mt-5">
                 <h1 className="md:text-4xl text-2xl z-20">{city?.city?.name || "No city found"}</h1>
 
-                <span className="flex justify-between items-end p-5 px-7 absolute w-full md:bottom-0 bottom-50 left-0 z-20">
+                <span className="flex justify-between items-end p-5 px-7 absolute w-full md:bottom-0 bottom-5 left-0 z-20">
                     <motion.h1
                         initial={{ y: -80, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
@@ -177,7 +210,7 @@ function Card({ city }) {
                         alt="weather icon"
                         className="md:w-28 w-20 -z-[30]"
                         initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 0, scale: 1 }}
+                        animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.4, duration: 0.6 }}
                     />
                 )}
@@ -188,6 +221,8 @@ function Card({ city }) {
             {state === 'moon' && moonJSX}
             {state === 'rainy' && rainyJSX}
             {state === 'stormy' && stormyJSX}
+            {state === 'foggy' && foggyJSX}
+            {state === 'snowy' && snowyJSX}
         </motion.div>
     )
 }
