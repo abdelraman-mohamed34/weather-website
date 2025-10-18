@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addCountry } from '@/app/features/country/saveCountrySlice.js'
 
 import { useMediaQuery } from '@mui/material'
@@ -13,7 +13,9 @@ import WeatherChart from './Graph.jsx'
 import UserLocationMap from './currentLocationOmMap.jsx'
 import RightBar from '../RightBar.jsx'
 
-function MainCards({ city }) {
+function MainCards({ city, primaryBg }) {
+    const colors = useSelector((state) => state.changeTheme.colors)
+
     const dispatch = useDispatch()
     const mediumWindow = useMediaQuery('(max-width:768px)');
 
@@ -37,7 +39,7 @@ function MainCards({ city }) {
                 </div>
             )}
 
-            <div className="bg-gray-900 text-white md:rounded-[25px] rounded-t-[25px] shadow-xl p-4 md:p-6 space-y-6 relative -mt-10 md:-mt-0 z-40">
+            <div className={`${colors.background} text-white md:rounded-[25px] rounded-t-[25px] md:shadow-none shadow-lg p-4 md:p-6 space-y-6 relative -mt-10 md:-mt-0 z-40`}>
                 <Forecast city={city} />
                 {mediumWindow && <RightBar city={city} />}
                 <AirCond city={city} />

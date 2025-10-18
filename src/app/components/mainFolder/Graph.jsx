@@ -21,10 +21,11 @@ export default function WeatherChart(props) {
 
         fetchForecast();
     }, [city]);
+    const colors = useSelector((state) => state.changeTheme.colors)
 
     return (
-        <div className="w-full h-64 bg-gray-800/50 rounded-2xl text-white sm:p-10 py-5" tabIndex={-1} onMouseDown={(e) => e.preventDefault()}>
-            <h2 className="text-gray-400 text-lg font-semibold mb-3 sm:pl-0 pl-5">Temperature Graph (Next 24h)</h2>
+        <div className={`w-full h-64 ${colors.card} rounded-2xl text-white sm:p-10 py-5`} tabIndex={-1} onMouseDown={(e) => e.preventDefault()}>
+            <h2 className={`${colors.title} text-lg md:text-xl font-semibold mb-3 sm:pl-0 pl-5`}>Temperature Graph (Next 24h)</h2>
             <Suspense fallback={<div>Loading chart...</div>}>
                 <ResponsiveContainer
                     width="100%"
@@ -35,7 +36,7 @@ export default function WeatherChart(props) {
                         <CartesianGrid strokeDasharray="3 3" stroke="0" />
                         <XAxis dataKey="time" stroke="#aaa" />
                         <YAxis stroke="#aaa" />
-                        <Tooltip contentStyle={{ backgroundColor: '#1f2937', border: 'none' }} />
+                        <Tooltip contentStyle={{ backgroundColor: colors.text, border: 'none' }} />
                         <Line
                             type="monotone"
                             dataKey="temp"

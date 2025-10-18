@@ -17,6 +17,7 @@ export default function SavedPage() {
     const smallWindow = useMediaQuery('(max-width:640px)')
     const router = useRouter()
     const showBar = useSelector((state) => state.showSidebar.stateComponent)
+    const colors = useSelector((state) => state.changeTheme.colors)
 
     useEffect(() => setIsClient(true), [])
     if (!isClient) return null
@@ -32,10 +33,10 @@ export default function SavedPage() {
     }
 
     return (
-        <div className="bg-gradient-to-b text-gray-200 grid md:grid-cols-[7rem_1fr]">
+        <div className={`bg-gradient-to-b ${colors.text} grid md:grid-cols-[7rem_1fr]`} >
 
             {/* left bar */}
-            <div className="relative top-0 left-0 w-full h-screen overflow-hidden md:flex hidden">
+            <div div className="relative top-0 left-0 w-full h-screen overflow-hidden md:flex hidden" >
                 <motion.div
                     initial={!smallWindow ? { y: 12, x: 12 } : { y: 0, x: 0 }}
                     animate={{ y: 0, x: 0 }}
@@ -51,25 +52,23 @@ export default function SavedPage() {
                         <SideBar />
                     </motion.div>
                 </motion.div>
-            </div>
+            </div >
             <div className='md:hidden flex'>
                 <SideBar />
             </div>
 
-
             <div className='sm:p-10 md:p-5 p-3 py-7'>
-
                 {/* header */}
                 <div className='flex items-center justify-center relative mb-5'>
                     <Link href={'/'}>
-                        <button className='absolute left-0 top-0 flex justify-center items-center h-full'>
+                        <button className={`absolute left-0 top-0 flex justify-center items-center h-full ${colors.text}`}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                             </svg>
                         </button>
                     </Link>
                     <motion.h1
-                        className="md:text-4xl text-xl font-bold sm:bm-12 text-center tracking-wide whitespace-nowrap"
+                        className={`md:text-4xl text-xl font-bold sm:bm-12 text-center tracking-wide whitespace-nowrap ${colors.text}`}
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
@@ -91,7 +90,7 @@ export default function SavedPage() {
                     </motion.p>
                 ) : (
                     <>
-                        <span className='w-full font-bold flex pb-3'>
+                        <span className={`w-full font-bold flex pb-3 ${colors.title}`}>
                             <h1>My Cities</h1>
                         </span>
                         <motion.div
@@ -115,18 +114,18 @@ export default function SavedPage() {
                                             showSavedCountryInHome(country)
                                         }}
                                         key={index}
-                                        className=" relative bg-gray-800/50 backdrop-blur-md rounded-lg px-6 py-2 shadow-xl hover:-translate-y-1 transition-all duration-300"
+                                        className={` relative ${colors.card} backdrop-blur-md rounded-lg px-6 py-2 shadow-xl hover:-translate-y-1 transition-all duration-300`}
                                         initial={{ opacity: 0, y: 40 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.5, delay: index * 0.1 }}
                                     >
                                         <div className="flex items-end text-center justify-between">
                                             <span className='flex items-center justify-between w-full'>
-                                                <h2 className="md:text-2xl text-xl font-semibold text-white">
+                                                <h2 className={`md:text-2xl text-xl font-semibold ${colors.text}`}>
                                                     {country.city.name + ',' + country.city.country}
                                                 </h2>
                                                 <span className='flex justify-center items-center gap-3'>
-                                                    <p className="md:text-3xl text-2xl font-bold text-white drop-shadow-sm" >
+                                                    <p className={`md:text-3xl text-2xl font-bold ${colors.text} drop-shadow-sm`} >
                                                         {temp}°
                                                         <span className="text-sky-400 md:text-2xl text-xl">C</span>
                                                     </p>
@@ -167,6 +166,6 @@ export default function SavedPage() {
 
             {/* side bar */}
 
-        </div>
+        </div >
     )
 }

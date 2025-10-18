@@ -16,7 +16,6 @@ function Card({ city }) {
     const moonClassName = 'bg-sky-700/90'
     const rainyClassName = 'bg-gradient-to-b from-sky-600 to-blue-900'
     const stormyClassName = 'bg-gradient-to-b from-gray-700 to-black'
-
     // ☀️ Sunny
     const sunnyJSX = (
         <>
@@ -146,14 +145,14 @@ function Card({ city }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className={`md:rounded-4xl h-full xl:mt-3 p-5 py-15 text-white relative overflow-hidden ${weatherBackgrounds[state]}`}
+            className={`md:rounded-4xl h-full xl:mt-3 p-5 py-15 text-white md:relative fixed top-0 right-0 w-full overflow-hidden md:shadow-xl ${weatherBackgrounds[state]}`}
         >
             <LocationBtn city={city} style={{ zIndex: 20 }} />
 
             <div className="flex justify-between items-center z-20 md:mt-0 mt-5">
                 <h1 className="md:text-4xl text-2xl z-20">{city?.city?.name || "No city found"}</h1>
 
-                <span className="flex justify-between items-end p-5 px-7 absolute w-full md:bottom-0 bottom-10 left-0 z-20">
+                <span className="flex justify-between items-end p-5 px-7 absolute w-full md:bottom-0 bottom-50 left-0 z-20">
                     <motion.h1
                         initial={{ y: -80, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}

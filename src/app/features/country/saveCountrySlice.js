@@ -4,7 +4,6 @@ import axios from 'axios'
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY
 
-// تحميل البيانات المحفوظة عند بداية التشغيل
 const savedFromLocalStorage =
     typeof window !== 'undefined'
         ? JSON.parse(localStorage.getItem('savedCountries')) || []

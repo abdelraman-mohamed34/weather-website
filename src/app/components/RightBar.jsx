@@ -1,10 +1,15 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useSelector } from 'react-redux';
 
 function RightBar(props) {
     const [dailyForecast, setDailyForecast] = useState([]);
     const city = props.city
+    const colors = useSelector((state) => state.changeTheme.colors)
+    const theme = useSelector((state) => state.changeTheme.theme)
+
+    console.log(theme)
 
     useEffect(() => {
         if (city?.list) {
@@ -42,12 +47,12 @@ function RightBar(props) {
 
     return (
         <motion.div
-            className="rounded-2xl md:bg-gray-800 md:p-10 px-5 overflow-hidden sm:sticky sm:top-1 xl:h-screen"
+            className={`rounded-2xl ${colors.background} md:p-10 px-5 overflow-hidden md:sticky md:top-1 xl:h-screen md:shadow-xl`}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
         >
-            <h1 className="text-gray-400 font-bold text-md sm:mb-5 mb-1">5-Day's Forecast</h1>
+            <h1 className="text-gray-400 font-bold md:text-xl text-md sm:mb-5 mb-1">5-Day's Forecast</h1>
             <div className='md:px-5'>
                 {dailyForecast.map((i, index) => (
                     <motion.span
@@ -73,10 +78,10 @@ function RightBar(props) {
                                     whileHover={{ rotate: 10, scale: 1.2 }}
                                     transition={{ type: "spring", stiffness: 200 }}
                                 />
-                                <h1 className="text-white font-medium">{i.condition}</h1>
+                                <h1 className={`${colors.text} font-medium`}>{i.condition}</h1>
                             </span>
 
-                            <h1 className="flex justify-center items-center text-white font-semibold md:ml-2">
+                            <h1 className={`flex justify-center items-center ${colors.text} font-semibold md:ml-2`} >
                                 {Math.round(i.temp_max)}
                                 <span>
                                     <h1 className="text-gray-400">{'/' + Math.round(i.temp_min)}</h1>

@@ -2,9 +2,12 @@
 import React from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import { useSelector } from 'react-redux'
 
 function LocationBtn(props) {
     const city = props.city
+    const colors = useSelector((state) => state.changeTheme.colors)
+
     return (
         <Link href="/map">
             <motion.button
@@ -16,7 +19,7 @@ function LocationBtn(props) {
                 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                className="absolute md:top-5 left-5 text-gray-600 rounded-2xl bg-white px-3 p-1 cursor-pointer flex items-center gap-1 shadow-md z-20"
+                className={`absolute md:top-5 left-5 ${colors.text} rounded-2xl ${colors.card} px-3 p-1 cursor-pointer flex items-center gap-1 shadow-md z-20`}
             >
                 <motion.svg
                     xmlns="http://www.w3.org/2000/svg"

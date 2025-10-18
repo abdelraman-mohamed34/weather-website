@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import SideBar from "./components/SideBar";
 import RightBar from "./components/RightBar";
 import Header from "./Header/page";
@@ -11,6 +11,7 @@ import { useMediaQuery } from "@mui/material";
 export default function Home() {
   const dispatch = useDispatch();
   const { country } = useSelector((state) => state.country);
+  const theme = useSelector((state) => state.changeTheme.theme);
   const [city, setCity] = useState(null);
   const mediumWindow = useMediaQuery('(max-width:768px)');
 
@@ -20,15 +21,8 @@ export default function Home() {
         setCity(country);
       } else {
         const saved = localStorage.getItem("currentCountry");
-        if (saved) {
-          try {
-            setCity(JSON.parse(saved));
-          } catch (err) {
-            console.error("Error parsing localStorage data", err);
-          }
-        } else {
-          dispatch(fetchApiCountries({ name: "Egypt" }));
-        }
+        if (saved) setCity(JSON.parse(saved));
+        else dispatch(fetchApiCountries({ name: "Egypt" }));
       }
     }
   }, [country, dispatch]);

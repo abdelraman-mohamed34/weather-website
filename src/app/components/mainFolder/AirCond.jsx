@@ -33,6 +33,7 @@ function AirCond(props) {
     const sunsetUnix = city?.city?.sunset;
     const localeSunrise = sunriseUnix ? new Date(sunriseUnix * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "--:--";
     const localeSunset = sunsetUnix ? new Date(sunsetUnix * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "--:--";
+    const colors = useSelector((state) => state.changeTheme.colors)
 
     const content = [
         { id: 1, name: "Real Feel", value: city?.list?.[0]?.main?.feels_like || 0, unit: '°', icon: <CiTempHigh className={`size-${iconSize}`} /> },
@@ -72,9 +73,9 @@ function AirCond(props) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
-                className=' whitespace-nowrap md:p-5 mb-3'
+                className=' whitespace-nowrap md:p-2 mb-3'
             >
-                <span className='flex items-center gap-1 text-gray-400 font-bold md:text-2xl text-sm md:mb-3 mb-1'>
+                <span className={`flex items-center gap-1 ${colors.secondTitle} font-bold md:text-xl text-sm md:mb-3 mb-1`}>
                     {item.icon} {item.name}
                 </span>
                 <span className='flex justify-start pl-5'>
@@ -82,7 +83,7 @@ function AirCond(props) {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.8 }}
-                        className="md:text-3xl text-lg font-bold text-gray-300"
+                        className={`md:text-2xl text-lg font-bold ${colors.text}`}
                     >
                         {displayValue}<span>{item.unit}</span>
                     </motion.p>
@@ -92,10 +93,10 @@ function AirCond(props) {
     }
 
     return (
-        <div className='bg-gray-800/50 w-full sm:p-10 p-5 py-5 rounded-2xl my-3'>
+        <div className={`${colors.card} w-full sm:p-10 p-5 py-5 rounded-2xl my-3`}>
             {/* Header */}
-            <div className='flex w-full justify-between items-center mb-3'>
-                <h1 className='font-bold text-gray-400 whitespace-nowrap'>Air Conditions</h1>
+            <div className={`flex w-full justify-between items-center mb-3 ${colors.title}`}>
+                <h1 className='font-bold md:text-2xl whitespace-nowrap'>Air Conditions</h1>
                 <button onClick={() => setShowMore(!showMore)} className="rounded-md bg-indigo-500 px-3.5 py-1.5 text-sm font-semibold whitespace-nowrap text-white shadow-xs hover:bg-indigo-400 cursor-pointer">
                     {showMore ? 'Show less' : 'Show more'}
                 </button>
@@ -112,7 +113,7 @@ function AirCond(props) {
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
                             transition={{ duration: 0.5 }}
-                            className="overflow-hidden grid grid-cols-2 gap-1 col-span-2"
+                            className={`overflow-hidden grid grid-cols-2 gap-1 col-span-2 ${colors.text}`}
                         >
                             {secondContent.map(item => <AirItem key={item.id + "_second"} item={item} />)}
                         </motion.div>

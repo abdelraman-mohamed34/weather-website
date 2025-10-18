@@ -17,12 +17,17 @@
   :root {
     /* back ground */
     --background: oklch(16.362% 0.03518 235.945);
-    --foreground: #ededed;
+    --background: #f7f7f7;
+    --foreground: #f8f8f8;
   }
 }
 
-body {
-  background: var(--background);
+body.dark {
+  background: oklch(16.362% 0.03518 235.945);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: #f7f7f7;
 }

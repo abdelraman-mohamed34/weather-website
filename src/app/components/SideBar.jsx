@@ -11,7 +11,9 @@ import { motion, AnimatePresence } from "framer-motion";
 
 function SideBar() {
     const showBar = useSelector((state) => state.showSidebar.stateComponent)
+    const colors = useSelector((state) => state.changeTheme.colors)
     const dispatch = useDispatch()
+
     const iconSize = 20;
     const hideNav = () => {
         dispatch(hide())
@@ -20,7 +22,7 @@ function SideBar() {
         { id: 1, name: 'Home', icon: <FiHome size={iconSize} />, route: '/', function: hideNav },
         { id: 2, name: 'map', icon: <CiMap size={iconSize} />, route: '/map', function: hideNav },
         { id: 3, name: 'saved', icon: <CiBookmark size={iconSize} />, route: '/saved', function: hideNav },
-        { id: 4, name: 'settings', icon: <CiSettings size={iconSize} />, route: '#', function: hideNav },
+        { id: 4, name: 'settings', icon: <CiSettings size={iconSize} />, route: '/settings', function: hideNav },
     ]
 
     useEffect(() => {
@@ -48,26 +50,26 @@ function SideBar() {
                     />
                 )}
             </AnimatePresence>
-            <div className={`z-[2000] bg-gray-800 md:rounded-2xl rounded-r-2xl md:p-5 pt-12 px-7 flex items-center flex-col md:sticky fixed top-0 
-                md:top-1 bottom-0 h-screen transition-all duration-300 pointer-events-auto  md:translate-x-0 ${!showBar ? '-translate-x-full' : 'translate-x-0'}`}>
-                <button className='absolute left-1 top-2 md:hidden' onClick={() => dispatch(hide())}>
+            <div className={`z-[2000] ${colors.background} ${colors.text} md:rounded-2xl md:shadow-md rounded-none md:p-5 pt-12 px-7 flex items-center flex-col md:sticky fixed top-0 
+                md:top-1 bottom-0 h-screen transition-all duration-300 pointer-events-auto  md:translate-x-0 md:min-w-auto min-w-[15rem] ${!showBar ? '-translate-x-full' : 'translate-x-0'}`}>
+                <button className={`${colors.text} absolute left-1 top-2 md:hidden`} onClick={() => dispatch(hide())}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                     </svg>
                 </button>
-                <Link href={'/'} className='cursor-context-menu'>
-                    <span className='aspect-square w-15 h-15 md:mb-10 mb-5 md:mr-0 flex justify-center items-center rounded-xl shadow-3xl bg-gradient-to-r from-red-500 to-orange-400'>
+                <Link href={'/'} onClick={() => dispatch(hide())} className='cursor-context-menu'>
+                    <span className='text-white aspect-square w-15 h-15 md:mb-10 mb-5 md:mr-0 flex justify-center items-center rounded-xl shadow-3xl bg-gradient-to-r from-red-500 to-orange-400'>
                         <FaWind className="size-7" />
                     </span>
                 </Link>
                 <nav className='flex justify-center sm:w-auto w-full'>
-                    <ul className='w-full flex md:justify-center justify-around flex-col text-gray-400 gap-5'>
+                    <ul className={`w-full flex md:justify-center justify-around flex-col gap-5`} >
                         {nav.map((i) => (
                             <Link
                                 key={i.id}
                                 href={i.route}
                             >
-                                <li onClick={i.function} className='flex md:justify-center md:flex-col gap-2 items-center hover:text-gray-100 cursor-pointer transition-all duration-300'>
+                                <li onClick={i.function} className={`flex md:justify-center md:flex-col gap-2 items-center cursor-pointer transition-all duration-300  ${colors.text}`}>
                                     {i.icon}
                                     <h1 className='mt-1'>
                                         {i.name}

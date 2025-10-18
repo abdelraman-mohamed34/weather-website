@@ -5,7 +5,7 @@ const initialState = {
 }
 
 export const showSidebarSlice = createSlice({
-    name: 'counter',
+    name: 'navBar',
     initialState,
     reducers: {
         show: (state) => {
