@@ -7,6 +7,7 @@ import ThemeToggle from '../components/theme'
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux'
 import { swapTheme } from '../features/country/changeThemeSlice'
+import { GrLanguage } from "react-icons/gr";
 
 export default function SettingsPage() {
     const colors = useSelector((state) => state.changeTheme.colors)
@@ -50,7 +51,7 @@ export default function SettingsPage() {
         {
             key: 'language',
             label: 'Language',
-            icon: <Globe2 className="text-blue-500 dark:text-blue-400" />,
+            icon: <GrLanguage className="text-blue-500 dark:text-blue-400" />,
             options: [
                 { value: 'en', label: 'English' },
                 { value: 'ar', label: 'العربية' },
@@ -87,8 +88,8 @@ export default function SettingsPage() {
                 </div>
             </header>
 
-            <motion.main className="flex-1 flex flex-col items-center justify-center p-6">
-                <div className={`w-full max-w-3xl ${colors.container} backdrop-blur-lg rounded-2xl shadow-2xl p-8 space-y-6`}>
+            <motion.main className="flex-1 flex flex-col">
+                <div className={`w-full max-w-3xl rounded-2xl p-8 space-y-6`}>
                     {settingsList.map((item) => (
                         <div
                             key={item.key}
