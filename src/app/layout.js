@@ -6,21 +6,23 @@ import Script from 'next/script';
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-        <Script id="theme-script" strategy="beforeInteractive">
-          {`
-            (function() {
-              try {
-                const saved = localStorage.getItem('storageTheme') || 'light';
-                if(saved === 'dark') {
-                  document.documentElement.classList.add('dark');
-                  document.body.classList.add('dark');
-                }
-              } catch(e) {}
-            })();
-          `}
-        </Script>
-      </head>
+      <Script id="theme-script" strategy="beforeInteractive">
+        {`
+          (function() {
+            try {
+              const saved = localStorage.getItem('storageTheme') || 'light';
+              const isDark = saved === 'dark';
+              if(isDark){
+                document.documentElement.classList.add('dark');
+                document.body.classList.add('dark');
+              } else {
+                document.documentElement.classList.remove('dark');
+                document.body.classList.remove('dark');
+              }
+            } catch(e) {}
+          })();
+        `}
+      </Script>
       <body>
         <ReduxProvider>
           <ThemeInitializer>
@@ -29,5 +31,5 @@ export default function RootLayout({ children }) {
         </ReduxProvider>
       </body>
     </html>
-  );
+  )
 }

@@ -88,7 +88,7 @@ export default function SettingsPage() {
                 </div>
             </header>
 
-            <motion.main className="flex-1 flex flex-col">
+            <motion.main className="flex-1 flex flex-col items-center">
                 <div className={`w-full max-w-3xl rounded-2xl p-8 space-y-6`}>
                     {settingsList.map((item) => (
                         <div
