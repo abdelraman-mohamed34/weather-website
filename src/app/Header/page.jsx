@@ -11,8 +11,6 @@ function Header(props) {
     const dispatch = useDispatch()
     const showSide = useSelector((state) => state.showSidebar.stateComponent)
 
-    console.log(showSide)
-
     const handleSearch = () => {
         if (!loadingSearched.trim()) return;
         dispatch(fetchApiCountries({ name: loadingSearched.trim() }))

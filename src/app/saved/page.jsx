@@ -47,7 +47,7 @@ export default function SavedPage() {
                         initial={{ borderRadius: 20 }}
                         animate={{ borderRadius: 0 }}
                         transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
-                        className="sm:h-full sm:w-auto w-full h-auto md:bg-gray-800 flex items-center flex-col md:sticky md:top-0 fixed bottom-0 transition-all duration-300"
+                        className={`sm:h-full sm:w-auto w-full h-auto md:${colors.background} flex items-center flex-col md:sticky md:top-0 fixed bottom-0 transition-all duration-300`}
                     >
                         <SideBar />
                     </motion.div>

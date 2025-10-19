@@ -9,8 +9,6 @@ function RightBar(props) {
     const colors = useSelector((state) => state.changeTheme.colors)
     const theme = useSelector((state) => state.changeTheme.theme)
 
-    console.log(theme)
-
     useEffect(() => {
         if (city?.list) {
             const grouped = {};

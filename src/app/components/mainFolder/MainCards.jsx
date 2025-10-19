@@ -28,17 +28,6 @@ function MainCards({ city, primaryBg }) {
             </div>
 
             {/* ===== Save Button ===== */}
-            {city && (
-                <div className="w-full justify-center md:justify-end hidden relative z-30">
-                    <button
-                        onClick={() => dispatch(addCountry(city))}
-                        className="bg-indigo-500 text-white px-6 py-2 rounded-lg hover:bg-indigo-600 active:scale-95 transition-all shadow-md"
-                    >
-                        Save
-                    </button>
-                </div>
-            )}
-
             <div className={`${colors.background} text-white md:rounded-[25px] rounded-t-[25px] -mt-10 md:shadow-none shadow-lg p-4 md:p-6 space-y-6 relative md:-mt-0 z-40`}>
                 <Forecast city={city} />
                 {mediumWindow && <RightBar city={city} />}

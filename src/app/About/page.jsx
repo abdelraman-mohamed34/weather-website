@@ -28,10 +28,6 @@ function Page() {
         }
     }
 
-    useEffect(() => {
-        console.log("Saved countries updated:", savedCountries);
-    }, [savedCountries]);
-
     return (
         <div>
             <h1>Weather Countries</h1>

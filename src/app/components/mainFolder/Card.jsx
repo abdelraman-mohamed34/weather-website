@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { motion } from "framer-motion";
 import LocationBtn from './LocationBtn'
 import { useMediaQuery } from '@mui/system';
+import { addCountry } from '@/app/features/country/saveCountrySlice';
 
 function Card({ city }) {
     const dispatch = useDispatch()
@@ -26,12 +27,10 @@ function Card({ city }) {
 
     const localTime = new Date(utcNow + timezone * 1000);
     const localHour = localTime.getHours();
-    const finalDate = localTime.toLocaleString('en-GB', {
+    const finalDate = localTime.toLocaleString('en-EG', {
         hour: '2-digit',
+        minute: '2-digit',
     })
-
-    console.log(typeof (Number(finalDate)));
-
 
     // ☀️ Sunny || done
     const sunnyJSX = (
@@ -215,12 +214,6 @@ function Card({ city }) {
         setCurrentWeather(closest)
     }, [city])
 
-    console.log(state)
-
-    const desc = currentWeather?.weather?.[0]?.description?.toLowerCase()
-    const iconCode = currentWeather?.weather?.[0]?.icon
-    const iconUrl = iconCode ? `https://openweathermap.org/img/wn/${iconCode}.png` : null
-
     const weatherBackgrounds = {
         sunny: sunnyClassName,
         noon: noonClassName,
@@ -232,27 +225,20 @@ function Card({ city }) {
         snowy: snowyClassName,
     }
 
-    // 🧩 Detect state from desc
-    // useEffect(() => {
-    //     if (!desc) return
-    //     if (desc.includes('thunder')) setState('stormy')
-    //     else if (desc.includes('rain')) setState('rainy')
-    //     else if (desc.includes('snow')) setState('snowy')
-    //     else if (desc.includes('fog') || desc.includes('mist')) setState('foggy')
-    //     else if (desc.includes('clear')) setState('sunny')
-    //     else setState('moon')
-    // }, [desc])
-
     useEffect(() => {
-        if (!localHour) return
-        if (localHour >= 5 && localHour < 9) setState('sunrise')
-        if (localHour >= 9 && localHour < 11) setState('noon')
-        if (localHour >= 11 && localHour < 17) setState('sunny')
-        if (localHour >= 17 && localHour < 20) setState('sunset')
-        else if (localHour >= 20 && localHour < 5) setState('moon')
-    }, [localHour])
-
-    const mediumWindow = useMediaQuery('(max-width:786px)')
+        if (localHour == null) return;
+        if (localHour >= 5 && localHour < 9) {
+            setState('sunrise');
+        } else if (localHour >= 9 && localHour < 11) {
+            setState('noon');
+        } else if (localHour >= 11 && localHour < 17) {
+            setState('sunny');
+        } else if (localHour >= 17 && localHour < 20) {
+            setState('sunset');
+        } else {
+            setState('moon');
+        }
+    }, [localHour]);
 
     return (
         <motion.div
@@ -277,14 +263,26 @@ function Card({ city }) {
                     >
                         {Math.round(currentWeather?.main?.temp || 0)}°
                     </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.6, duration: 0.5 }}
-                        className="md:text-lg text-sm mb-2 whitespace-nowrap"
-                    >
-                        Chance of rain: {Math.round((currentWeather?.pop || 0) * 100)}%
-                    </motion.p>
+                    <span className='flex flex-col justify-end'>
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.6, duration: 0.5 }}
+                            className="md:text-lg text-sm mb-2 whitespace-nowrap"
+                        >
+                            Chance of rain: {Math.round((currentWeather?.pop || 0) * 100)}%
+                        </motion.p>
+                        {city && (
+                            <div className="w-full justify-end flex relative z-30">
+                                <button
+                                    onClick={() => dispatch(addCountry(city))}
+                                    className="bg-indigo-500 text-white px-6 py-2 rounded-lg hover:bg-indigo-600 active:scale-95 transition-all shadow-md"
+                                >
+                                    Save
+                                </button>
+                            </div>
+                        )}
+                    </span>
                 </span>
             </div>
 
