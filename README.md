@@ -1,37 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🌤️ Weather Website
 
-## Getting Started
+A modern and responsive **Weather Web Application** built with **Next.js**, **Redux**, **Tailwind CSS**, and **Material UI (MUI)**.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🔗 Live Demo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+https://weather-website-omega-liard.vercel.app/
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📌 Overview
 
-## Learn More
+A simple and fast weather application that allows users to search for any city and view real-time weather data with a clean and responsive UI.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ✨ Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Search weather by city
+- Display current temperature and conditions
+- Wind speed and humidity
+- Responsive design
+- Fast UI updates
+- Redux state management
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🛠️ Tech Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-"# weather-website" 
+- Next.js
+- JavaScript
+- Tailwind CSS
+- Material UI (MUI)
+- Redux
+- Weather API
+
+---
+
+## 📁 Project Structure
+
+weather-website/
+├─ src/
+│  ├─ app/                         # Next.js App Router
+│  │  ├─ page.jsx                  # Main page (Home)
+│  │  ├─ layout.jsx                # Root layout
+│  │  ├─ globals.css               # Global styles
+│  │  └─ loading.jsx               # Global loading UI
+│  │
+│  ├─ components/                  # Reusable UI components
+│  │  ├─ SearchBar.jsx             # City search input
+│  │  ├─ WeatherCard.jsx           # Weather information card
+│  │  ├─ WeatherDetails.jsx        # Extra weather details
+│  │  └─ Loader.jsx                # Loading spinner
+│  │
+│  ├─ redux/                       # Redux state management
+│  │  ├─ store.js                  # Redux store
+│  │  └─ weatherSlice.js           # Weather state & reducers
+│  │
+│  ├─ services/                    # API services
+│  │  └─ weatherService.js         # Weather API calls
+│  │
+│  ├─ utils/                       # Helper functions
+│  │  └─ formatTemperature.js
+│  │
+│  └─ constants/                   # Static constants
+│     └─ apiUrls.js
+│
+├─ public/                         # Static assets
+│  ├─ icons/
+│  └─ images/
+│
+├─ .env.local                      # Environment variables
+├─ .gitignore
+├─ next.config.mjs                 # Next.js configuration
+├─ postcss.config.mjs              # PostCSS config
+├─ tailwind.config.js              # Tailwind config
+├─ jsconfig.json                   # Path aliases
+├─ package.json
+├─ package-lock.json
+└─ README.md
