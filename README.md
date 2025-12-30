@@ -40,6 +40,7 @@ A simple and fast weather application that allows users to search for any city a
 
 ## 📁 Project Structure
 
+``
 weather-website/
 ├─ src/
 │  ├─ app/
@@ -80,3 +81,5 @@ weather-website/
 ├─ package.json
 ├─ package-lock.json
 └─ README.md
+``
+⭐ If you like this project, don’t forget to give it a star!
