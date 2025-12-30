@@ -42,41 +42,41 @@ A simple and fast weather application that allows users to search for any city a
 
 weather-website/
 ├─ src/
-│  ├─ app/                         # Next.js App Router
-│  │  ├─ page.jsx                  # Main page (Home)
-│  │  ├─ layout.jsx                # Root layout
-│  │  ├─ globals.css               # Global styles
-│  │  └─ loading.jsx               # Global loading UI
+│  ├─ app/
+│  │  ├─ page.jsx
+│  │  ├─ layout.jsx
+│  │  ├─ globals.css
+│  │  └─ loading.jsx
 │  │
-│  ├─ components/                  # Reusable UI components
-│  │  ├─ SearchBar.jsx             # City search input
-│  │  ├─ WeatherCard.jsx           # Weather information card
-│  │  ├─ WeatherDetails.jsx        # Extra weather details
-│  │  └─ Loader.jsx                # Loading spinner
+│  ├─ components/
+│  │  ├─ SearchBar.jsx
+│  │  ├─ WeatherCard.jsx
+│  │  ├─ WeatherDetails.jsx
+│  │  └─ Loader.jsx
 │  │
-│  ├─ redux/                       # Redux state management
-│  │  ├─ store.js                  # Redux store
-│  │  └─ weatherSlice.js           # Weather state & reducers
+│  ├─ redux/
+│  │  ├─ store.js
+│  │  └─ weatherSlice.js
 │  │
-│  ├─ services/                    # API services
-│  │  └─ weatherService.js         # Weather API calls
+│  ├─ services/
+│  │  └─ weatherService.js
 │  │
-│  ├─ utils/                       # Helper functions
+│  ├─ utils/
 │  │  └─ formatTemperature.js
 │  │
-│  └─ constants/                   # Static constants
+│  └─ constants/
 │     └─ apiUrls.js
 │
-├─ public/                         # Static assets
+├─ public/
 │  ├─ icons/
 │  └─ images/
 │
-├─ .env.local                      # Environment variables
+├─ .env.local
 ├─ .gitignore
-├─ next.config.mjs                 # Next.js configuration
-├─ postcss.config.mjs              # PostCSS config
-├─ tailwind.config.js              # Tailwind config
-├─ jsconfig.json                   # Path aliases
+├─ next.config.mjs
+├─ postcss.config.mjs
+├─ tailwind.config.js
+├─ jsconfig.json
 ├─ package.json
 ├─ package-lock.json
 └─ README.md
